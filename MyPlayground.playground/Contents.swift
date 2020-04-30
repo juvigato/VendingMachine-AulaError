@@ -74,9 +74,11 @@ class VendingMachine {
     
     func getTroco() -> Double {
         //TODO: devolver o dinheiro que não foi gasto
-        var money = self.money
-        self.money = 0
-        return money
+        defer {
+            self.money = 0
+        }
+        return self.money
+        //ele vai retornar o money e depois vai zerar
     }
     
     func showProducts() {
@@ -85,7 +87,6 @@ class VendingMachine {
         }
     }
 }
-
 
 let vendingMachine = VendingMachine( products: [
     VendingMachineProduct(name: "Batata", amount: 4, price: 3.00, number: 1),
